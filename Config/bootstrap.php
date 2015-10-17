@@ -4,17 +4,8 @@ if (!Configure::read('Assets.installed')) {
 	return;
 }
 
-spl_autoload_register(function($class) {
-	$defaultPath = CakePlugin::path('Assets') . 'Vendor' . DS . 'Gaufrette' . DS . 'src' . DS;
-	$base = Configure::read('Assets.GaufretteLib');
-	if (empty($base)) {
-		$base = $defaultPath;
-	}
-	$class = str_replace('\\', DS, $class);
-	if (file_exists($base . $class . '.php')) {
-		include ($base . $class . '.php');
-	}
-});
+require_once CakePlugin::path('Assets') . DS . 'Lib' . DS . 'Utility' . DS . 'FileStorageUtils.php';
+spl_autoload_register(array('FileStorageUtils', 'gaufretteLoader'));
 
 Configure::write('Wysiwyg.attachmentBrowseUrl', array(
 	'plugin' => 'assets',
