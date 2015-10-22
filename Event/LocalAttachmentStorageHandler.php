@@ -75,7 +75,6 @@ class LocalAttachmentStorageHandler extends BaseStorageHandler implements CakeEv
 	}
 
 	public function onBeforeDelete($Event) {
-		$model = $Event->subject();
 		if (!$this->_check($Event)) {
 			return true;
 		}
